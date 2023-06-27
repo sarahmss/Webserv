@@ -11,7 +11,7 @@
 	as a definition to the connect_to_network() virtual function from SimpleSocket.
 */
 
-namespace HTTP
+namespace FT
 {
 	class ConnectingSocket: public SimpleSocket
 	{

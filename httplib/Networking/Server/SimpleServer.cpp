@@ -4,7 +4,7 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-HTTP::SimpleServer::SimpleServer(int domain, int service, int protocol, int port, unsigned long int interface, int bklg)
+FT::SimpleServer::SimpleServer(int domain, int service, int protocol, int port, unsigned long int interface, int bklg)
 {
 	socket = new ListeningSocket(domain, service, protocol, port, interface, bklg);
 }
@@ -13,7 +13,7 @@ HTTP::SimpleServer::SimpleServer(int domain, int service, int protocol, int port
 ** -------------------------------- DESTRUCTOR --------------------------------
 */
 
-HTTP::SimpleServer::~SimpleServer()
+FT::SimpleServer::~SimpleServer()
 {
 	delete socket;
 	return ;
@@ -29,7 +29,7 @@ HTTP::SimpleServer::~SimpleServer()
 ** --------------------------------- ACCESSOR ---------------------------------
 */
 
-HTTP::ListeningSocket * HTTP::SimpleServer::get_socket()
+FT::ListeningSocket * FT::SimpleServer::get_socket()
 {
 	return (socket);
 }

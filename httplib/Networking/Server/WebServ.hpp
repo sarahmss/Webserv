@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WebServer.hpp                                      :+:      :+:    :+:   */
+/*   WebServ.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smodesto <smodesto@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -18,14 +18,14 @@
 # include <unistd.h>
 #include "./SimpleServer.hpp"
 
-namespace HTTP
+namespace FT
 {
-	class WebServer: public SimpleServer
+	class WebServ: public SimpleServer
 	{
 		public:
 
-			WebServer();
-			~WebServer();
+			WebServ();
+			~WebServ();
 
 			void launch(void);
 
@@ -42,4 +42,4 @@ namespace HTTP
 
 
 
-#endif /* ******************************************************* WEBSERVER_H */
+#endif /* ******************************************************* WebServ_H */

@@ -5,7 +5,7 @@
 # include <stdio.h>
 #include "BindingSocket.hpp"
 
-namespace HTTP
+namespace FT
 {
 	class ListeningSocket: public BindingSocket
 	{

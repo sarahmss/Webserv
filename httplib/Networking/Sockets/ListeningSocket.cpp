@@ -4,7 +4,7 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-HTTP::ListeningSocket::ListeningSocket(int domain, int service, int protocol,  int port, unsigned long interface, int bklog):
+FT::ListeningSocket::ListeningSocket(int domain, int service, int protocol,  int port, unsigned long interface, int bklog):
 BindingSocket(domain, service, protocol, port, interface)
 {
 	backlog = bklog;
@@ -13,7 +13,7 @@ BindingSocket(domain, service, protocol, port, interface)
 
 }
 
-HTTP::ListeningSocket::ListeningSocket( ListeningSocket & src ): HTTP::BindingSocket(src)
+FT::ListeningSocket::ListeningSocket( ListeningSocket & src ): FT::BindingSocket(src)
 {
 	this->listening = src.listening;
 	this->backlog = src.backlog;
@@ -24,7 +24,7 @@ HTTP::ListeningSocket::ListeningSocket( ListeningSocket & src ): HTTP::BindingSo
 ** -------------------------------- DESTRUCTOR --------------------------------
 */
 
-HTTP::ListeningSocket::~ListeningSocket()
+FT::ListeningSocket::~ListeningSocket()
 {
 	return ;
 }
@@ -34,11 +34,11 @@ HTTP::ListeningSocket::~ListeningSocket()
 ** --------------------------------- OVERLOAD ---------------------------------
 */
 
-HTTP::ListeningSocket &				HTTP::ListeningSocket::operator=( ListeningSocket  & rhs )
+FT::ListeningSocket &				FT::ListeningSocket::operator=( ListeningSocket  & rhs )
 {
 	if ( this != &rhs )
 	{
-        HTTP::BindingSocket::operator=(rhs);
+        FT::BindingSocket::operator=(rhs);
 		this->listening = rhs.get_listening();
 		this->backlog = rhs.get_backlog();
 	}
@@ -49,7 +49,7 @@ HTTP::ListeningSocket &				HTTP::ListeningSocket::operator=( ListeningSocket  & 
 ** --------------------------------- METHODS ----------------------------------
 */
 
-void HTTP::ListeningSocket::start_listening()
+void FT::ListeningSocket::start_listening()
 {
 	listening = listen(get_sock(), backlog);
 }
@@ -58,12 +58,12 @@ void HTTP::ListeningSocket::start_listening()
 ** --------------------------------- ACCESSOR ---------------------------------
 */
 
-int HTTP::ListeningSocket::get_listening()
+int FT::ListeningSocket::get_listening()
 {
 	return (listening);
 }
 
-int HTTP::ListeningSocket::get_backlog()
+int FT::ListeningSocket::get_backlog()
 {
 	return (backlog);
 }

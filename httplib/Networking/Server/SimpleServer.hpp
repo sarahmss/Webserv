@@ -6,7 +6,7 @@
 
 #include "../httpNetworking.hpp"
 
-namespace HTTP
+namespace FT
 {
 	class SimpleServer
 	{

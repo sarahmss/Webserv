@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   BindingSocket.cpp                                  :+:      :+:    :+:   */
+/*   Uri.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smodesto <smodesto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/09 12:01:44 by smodesto          #+#    #+#             */
+/*   Created: 2023/06/26 21:12:18 by smodesto          #+#    #+#             */
 /*   Updated: 2023/06/26 21:58:44 by smodesto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "BindingSocket.hpp"
+#include "Uri.hpp"
 
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-FT::BindingSocket::BindingSocket(int domain, int service, int protocol, int port, unsigned long interface):
-	SimpleSocket(domain, service, protocol, port, interface)
+FT::Uri::Uri()
 {
-	set_connection(connect_to_network(get_sock(), get_address()));
-	test_connection(get_connection());
+
 }
 
-FT::BindingSocket::BindingSocket( BindingSocket & src ): FT::SimpleSocket(src)
+FT::Uri::Uri( const std::string & path ): _path( path )
 {
-	return ;
+	_SetPathToLowercase();
 }
 
 
@@ -33,9 +31,8 @@ FT::BindingSocket::BindingSocket( BindingSocket & src ): FT::SimpleSocket(src)
 ** -------------------------------- DESTRUCTOR --------------------------------
 */
 
-FT::BindingSocket::~BindingSocket()
+FT::Uri::~Uri()
 {
-	return ;
 }
 
 
@@ -43,25 +40,43 @@ FT::BindingSocket::~BindingSocket()
 ** --------------------------------- OVERLOAD ---------------------------------
 */
 
-FT::BindingSocket &				FT::BindingSocket::operator=( BindingSocket & rhs )
+bool	FT::Uri::operator<(const Uri& rhs) const
 {
-	if ( this != &rhs )
-        FT::SimpleSocket::operator=(rhs);
-	return *this;
+	return (_path < rhs.getPath());
+}
+
+bool	FT::Uri::operator==(const Uri& rhs) const
+{
+	return (_path == rhs.getPath());
 }
 
 /*
 ** --------------------------------- METHODS ----------------------------------
 */
 
-
-int FT::BindingSocket::connect_to_network(int sock, struct sockaddr_in address)
+void FT::Uri::_SetPathToLowercase(void)
 {
-	return (bind(sock, (struct sockaddr *)&address, sizeof(address)));
+	std::transform(_path.begin(), _path.end(),
+					_path.begin(), [](char c) { return tolower(c); });
 }
+
+void FT::Uri::SetPath(const std::string &path)
+{
+	_path = std::move(path);
+	_SetPathToLowercase();
+}
+
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
 */
+
+std::string		FT::Uri::getScheme() const { return _scheme; }
+
+std::string		FT::Uri::getHost() const { return _host; }
+
+std::uint16_t	FT::Uri::getPort() const { return _port; }
+
+std::string		FT::Uri::getPath() const { return _path; }
 
 
 /* ************************************************************************** */

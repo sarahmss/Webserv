@@ -1,10 +1,10 @@
-#include "WebServer.hpp"
+#include "WebServ.hpp"
 
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-HTTP::WebServer::WebServer(): SimpleServer(AF_INET, SOCK_STREAM, 0, 80, INADDR_ANY, 10)
+FT::WebServ::WebServ(): SimpleServer(AF_INET, SOCK_STREAM, 0, 80, INADDR_ANY, 10)
 {
 	launch();
 }
@@ -15,7 +15,7 @@ HTTP::WebServer::WebServer(): SimpleServer(AF_INET, SOCK_STREAM, 0, 80, INADDR_A
 ** -------------------------------- DESTRUCTOR --------------------------------
 */
 
-HTTP::WebServer::~WebServer()
+FT::WebServ::~WebServ()
 {
 }
 
@@ -24,7 +24,7 @@ HTTP::WebServer::~WebServer()
 ** --------------------------------- METHODS ----------------------------------
 */
 
-void	HTTP::WebServer::launch()
+void	FT::WebServ::launch()
 {
 	while (true)
 	{
@@ -36,7 +36,7 @@ void	HTTP::WebServer::launch()
 	}
 }
 
-void	HTTP::WebServer::accepter(void)
+void	FT::WebServ::accepter(void)
 {
 	ListeningSocket *	socket = get_socket();
 	struct sockaddr_in	address = socket->get_address();
@@ -49,15 +49,15 @@ void	HTTP::WebServer::accepter(void)
 	read(new_socket, buffer, 30000);
 }
 
-void	HTTP::WebServer::handler(void)
+void	FT::WebServ::handler(void)
 {
 	std::cout << buffer << std::endl;
 }
 
-void	HTTP::WebServer::responder(void)
+void	FT::WebServ::responder(void)
 {
-	std::string response =  "hello from server\n";
-	write(new_socket, response.c_str(), response.size());	
+	std::string response = "FT/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 12\n\nHello world!";
+	write(new_socket, response.c_str(), response.size());
 	close(new_socket);
 }
 /*

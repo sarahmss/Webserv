@@ -6,10 +6,10 @@
 # include "SimpleSocket.hpp"
 
 /*
-	This class implements a call to the bind() function of sockets as a deefinition of 
+	This class implements a call to the bind() function of sockets as a deefinition of
 	connect_to_network virtual function from SimpleSocket
 */
-namespace HTTP
+namespace FT
 {
 	class BindingSocket: public SimpleSocket
 	{

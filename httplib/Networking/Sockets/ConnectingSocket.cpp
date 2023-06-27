@@ -4,14 +4,14 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-HTTP::ConnectingSocket::ConnectingSocket(int domain, int service, int protocol, int port, unsigned long interface):
+FT::ConnectingSocket::ConnectingSocket(int domain, int service, int protocol, int port, unsigned long interface):
 	SimpleSocket(domain, service, protocol, port, interface)
 {
-	set_connection(connect_to_network(get_sock(), get_address())); 
+	set_connection(connect_to_network(get_sock(), get_address()));
 	test_connection(get_connection());
 }
 
-HTTP::ConnectingSocket::ConnectingSocket( ConnectingSocket & src ): HTTP::SimpleSocket(src)
+FT::ConnectingSocket::ConnectingSocket( ConnectingSocket & src ): FT::SimpleSocket(src)
 {
 	return ;
 }
@@ -21,7 +21,7 @@ HTTP::ConnectingSocket::ConnectingSocket( ConnectingSocket & src ): HTTP::Simple
 ** -------------------------------- DESTRUCTOR --------------------------------
 */
 
-HTTP::ConnectingSocket::~ConnectingSocket()
+FT::ConnectingSocket::~ConnectingSocket()
 {
 	return ;
 }
@@ -31,10 +31,10 @@ HTTP::ConnectingSocket::~ConnectingSocket()
 ** --------------------------------- OVERLOAD ---------------------------------
 */
 
-HTTP::ConnectingSocket &				HTTP::ConnectingSocket::operator=( ConnectingSocket & rhs )
+FT::ConnectingSocket &				FT::ConnectingSocket::operator=( ConnectingSocket & rhs )
 {
 	if ( this != &rhs )
-        HTTP::SimpleSocket::operator=(rhs);
+        FT::SimpleSocket::operator=(rhs);
 	return *this;
 }
 
@@ -42,7 +42,7 @@ HTTP::ConnectingSocket &				HTTP::ConnectingSocket::operator=( ConnectingSocket 
 ** --------------------------------- METHODS ----------------------------------
 */
 
-int HTTP::ConnectingSocket::connect_to_network(int sock, struct sockaddr_in address)
+int FT::ConnectingSocket::connect_to_network(int sock, struct sockaddr_in address)
 {
 	return (connect(sock, (struct sockaddr *)&address, sizeof(address)));
 }

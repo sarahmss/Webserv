@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smodesto <smodesto@student.42.fr>          +#+  +:+       +#+         #
+#    By: smodesto <smodesto@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/11 17:02:33 by smodesto          #+#    #+#              #
-#    Updated: 2023/06/25 18:53:23 by smodesto         ###   ########.fr        #
+#    Updated: 2023/06/26 19:20:39 by smodesto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= Webserver
+NAME	= WebServ
 
 SRC_PATH		= ./
 INCLUDES_PATH	= ./
@@ -21,8 +21,8 @@ SRCS_FILES =	tests/main.cpp							\
 				Networking/Sockets/ConnectingSocket.cpp	\
 				Networking/Sockets/ListeningSocket.cpp	\
 				Networking/Sockets/SimpleSocket.cpp		\
-				Networking/Servers/SimpleServer.cpp		\
-				Networking/Servers/WebServer.cpp
+				Networking/Server/SimpleServer.cpp		\
+				Networking/Server/WebServ.cpp
 
 SRCS = $(addprefix $(SRC_PATH), $(SRCS_FILES))
 
@@ -36,11 +36,11 @@ HEADER_FILES	=	httplib.hpp								\
 					Networking/Sockets/ConnectingSocket.hpp	\
 					Networking/Sockets/ListeningSocket.hpp	\
 					Networking/Sockets/SimpleSocket.hpp		\
-					Networking/Servers/httpServers.hpp		\
-					Networking/Servers/SimpleServer.hpp		\
-					Networking/Servers/WebServer.hpp
-					
-					
+					Networking/Server/httpServ.hpp			\
+					Networking/Server/SimpleServer.hpp		\
+					Networking/Server/WebServ.hpp
+
+
 HEADERS = $(addprefix $(INCLUDES_PATH), $(HEADER_FILES))
 
 CC			= c++
@@ -56,7 +56,7 @@ $(OBJS_PATH)%.o : $(SRC_PATH)%.cpp $(HEADERS)
 			@mkdir -p objects
 			@mkdir -p objects/tests
 			@mkdir -p objects/Networking/Sockets
-			@mkdir -p objects/Networking/Servers
+			@mkdir -p objects/Networking/Server
 
 			$(CC) $(FLAGS) -c  $< -o $@
 
