@@ -6,7 +6,7 @@
 /*   By: smodesto <smodesto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 21:31:33 by smodesto          #+#    #+#             */
-/*   Updated: 2023/06/26 22:38:34 by smodesto         ###   ########.fr       */
+/*   Updated: 2023/07/09 20:38:34 by smodesto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	FT::HttpMessage::_SetContentLength(void)
 	SetHeader("Content-Length", std::to_string(_content.length()));
 }
 
-std::string		_toString(FT::HttpMethod method)
+std::string		FT::HttpMessage::_toString(FT::HttpMethod method)
 {
 	switch (method) {
 	case FT::HttpMethod::GET:
@@ -58,7 +58,7 @@ std::string		_toString(FT::HttpMethod method)
 		return std::string();
   }
 }
-std::string		_toString(FT::HttpVersion version)
+std::string		FT::HttpMessage::_toString(FT::HttpVersion version)
 {
 	switch (version)
 	{
@@ -75,7 +75,7 @@ std::string		_toString(FT::HttpVersion version)
 	}
 }
 
-std::string		_toString(FT::HttpStatusCode status_code)
+std::string		FT::HttpMessage::_toString(FT::HttpStatusCode status_code)
 {
 	switch (status_code) {
 	case FT::HttpStatusCode::Continue:
@@ -109,7 +109,7 @@ std::string		_toString(FT::HttpStatusCode status_code)
 	}
 }
 
-FT::HttpMethod		_stringToMethod(const std::string& method)
+FT::HttpMethod		FT::HttpMessage::_stringToMethod(const std::string& method)
 {
 	std::string method_string_uppercase;
 	std::transform(method.begin(), method.end(),
@@ -138,7 +138,7 @@ FT::HttpMethod		_stringToMethod(const std::string& method)
 	}
 }
 
-FT::HttpVersion		_stringToVersion(const std::string& version)
+FT::HttpVersion		FT::HttpMessage::_stringToVersion(const std::string& version)
 {
 	std::string version_string_uppercase;
 
@@ -159,11 +159,6 @@ FT::HttpVersion		_stringToVersion(const std::string& version)
 	}
 }
 
-void	FT::HttpMessage::SetHeader(const std::string& key, const std::string& value)
-{
-	_headers[key] = std::move(value);
-}
-
 void	FT::HttpMessage::RemoveHeader(const std::string& key)
 {
 	_headers.erase(key);
@@ -174,11 +169,6 @@ void	FT::HttpMessage::ClearHeader(void)
 	_headers.clear();
 }
 
-void	FT::HttpMessage::SetContent(const std::string& content)
-{
-	_content = std::move(content);
-	_SetContentLength();
-}
 
 void	FT::HttpMessage::ClearContent(void)
 {
@@ -192,6 +182,18 @@ size_t	FT::HttpMessage::ContentLength(void) const{ return _content.length(); }
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
 */
+
+
+void	FT::HttpMessage::SetContent(const std::string& content)
+{
+	_content = std::move(content);
+	_SetContentLength();
+}
+
+void	FT::HttpMessage::SetHeader(const std::string& key, const std::string& value)
+{
+	_headers[key] = std::move(value);
+}
 
 FT::HttpVersion	FT::HttpMessage::getVersion(void) const { return _version; }
 

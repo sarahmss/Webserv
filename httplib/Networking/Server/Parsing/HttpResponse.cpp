@@ -4,12 +4,14 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-HttpResponse::HttpResponse()
+FT::HttpResponse::HttpResponse(): _statusCode(HttpStatusCode::Ok)
 {
+	return ;
 }
 
-HttpResponse::HttpResponse( const HttpResponse & src )
+FT::HttpResponse::HttpResponse(HttpStatusCode sttsCd): _statusCode(sttsCd)
 {
+	return ;
 }
 
 
@@ -17,28 +19,9 @@ HttpResponse::HttpResponse( const HttpResponse & src )
 ** -------------------------------- DESTRUCTOR --------------------------------
 */
 
-HttpResponse::~HttpResponse()
+FT::HttpResponse::~HttpResponse()
 {
-}
-
-
-/*
-** --------------------------------- OVERLOAD ---------------------------------
-*/
-
-HttpResponse &				HttpResponse::operator=( HttpResponse const & rhs )
-{
-	//if ( this != &rhs )
-	//{
-		//this->_value = rhs.getValue();
-	//}
-	return *this;
-}
-
-std::ostream &			operator<<( std::ostream & o, HttpResponse const & i )
-{
-	//o << "Value = " << i.getValue();
-	return o;
+	return ;
 }
 
 
@@ -46,10 +29,36 @@ std::ostream &			operator<<( std::ostream & o, HttpResponse const & i )
 ** --------------------------------- METHODS ----------------------------------
 */
 
+FT::HttpResponse	FT::HttpResponse::stringToResponse (const std::string& response)
+{
+	throw	std::logic_error("method not implemented");
+}
 
+std::string	FT::HttpResponse::toString(const FT::HttpResponse &response, bool sendContent)
+{
+	std::ostringstream	oss;
+
+	oss << _toString(response.getVersion()) << ' ';
+	oss << static_cast<int>(response.GetStatusCode()) << ' ';
+	oss << _toString(response.GetStatusCode()) << '\r\n';
+	for (const auto& p : response.getHeaders())
+		oss << p.first << ": " << p.second << "\r\n";
+	oss << "\r\n";
+	if (sendContent)
+		oss << response.getContent();
+	return (oss.str());
+}
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
 */
 
+void	FT::HttpResponse::SetStatusCode(HttpStatusCode sttsCd)
+{
+	_statusCode = sttsCd;
+}
+FT::HttpStatusCode		FT::HttpResponse::GetStatusCode(void) const
+{
+	return (_statusCode);
+}
 
 /* ************************************************************************** */

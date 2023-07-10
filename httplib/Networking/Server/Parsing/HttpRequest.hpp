@@ -3,18 +3,39 @@
 
 # include <iostream>
 # include <string>
+# include "HttpMessage.hpp"
+# include "Uri.hpp"
 
-class HttpRequest
+/*
+	Represents a single HTTP request
+	it has a HTTP method and URI so that server can identify
+	the corresponding resource and action
+*/
+
+namespace	FT
 {
+	class HttpRequest : public HttpMessage
+	{
 
-	public:
+		public:
+			HttpRequest();
+			~HttpRequest();
 
-		HttpRequest();
-		HttpRequest( HttpRequest const & src );
-		~HttpRequest();
+			void		setMethod(HttpMethod method);
+			void		setUri(const Uri &uri);
 
-	private:
+			HttpMethod	getMethod(void) const;
+			Uri			getUri(void) const;
 
-};
+			std::string	toString(const HttpRequest &request);
+			HttpRequest	stringToRequest(const std::string &requestStr);
+
+		private:
+			HttpMethod	_method;
+			Uri			_uri;
+
+	};
+}
+
 
 #endif /* ***************************************************** HTTPREQUEST_H */
