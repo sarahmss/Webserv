@@ -6,29 +6,47 @@
 /*   By: smodesto <smodesto@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/09 12:27:22 by smodesto          #+#    #+#             */
-/*   Updated: 2023/07/10 17:59:16 by smodesto         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:40:05 by smodesto         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./Networking/Sockets/httpSockets.hpp"
 #include "./Networking/Server/httpServ.hpp"
+//#include "./Settings/Parser.hpp"
 
+#include <errno.h>
 
-/*static void testSockets(void)
+std::string	SetConfigurationFile(int argc, char *argv[])
 {
-	std::cout << "<<< Starting... >>>" << std::endl;
-	std::cout << "Binding Socket..." << std::endl;
-	FT::BindingSocket bs(AF_INET, SOCK_STREAM, 0, 81, INADDR_ANY);
-	std::cout << "Listening socket..." << std::endl;
-	FT::ListeningSocket ls(AF_INET, SOCK_STREAM, 0, 80, INADDR_ANY, 10);
-}*/
-
-static void testServer(void)
-{
-	FT::WebServ WebServ;
+	if (argc < 2)
+	{
+		std::cout << "./webserv [configuration_file_path]" << std::endl;
+		exit(EINVAL);
+	}
+	if (argc == 1)
+		return ("./conf/webserv.conf");
+	return(argv[1]);
 }
-
-int main(void)
+/*
+void	ParseConfigurationFile(FT::Parser &parser, std::string filename)
 {
-	testServer();
+	try {
+		parser.exec(filename);
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << "Error: " << e.what() << std::endl;
+		exit(EBADF);
+	}
+}
+*/
+int main(int argc, char **argv)
+{
+	std::string	filename;
+	//FT::Parser	parser;
+
+	filename = SetConfigurationFile(argc, argv);
+	//ParseConfigurationFile(filename, parser);
+
+
+//	FT::WebServ WebServ;
 }

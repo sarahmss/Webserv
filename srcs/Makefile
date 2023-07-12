@@ -6,11 +6,11 @@
 #    By: smodesto <smodesto@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/11 17:02:33 by smodesto          #+#    #+#              #
-#    Updated: 2023/07/10 17:58:34 by smodesto         ###   ########.fr        #
+#    Updated: 2023/07/10 18:42:24 by smodesto         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= WebServ
+NAME	= webserv
 
 SRC_PATH		= ./
 INCLUDES_PATH	= ./
